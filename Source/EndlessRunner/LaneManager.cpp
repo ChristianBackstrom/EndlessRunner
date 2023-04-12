@@ -3,6 +3,7 @@
 
 #include "LaneManager.h"
 #include "MovementController.h"
+#include "ObstacleSpawner.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -20,7 +21,10 @@ void ALaneManager::BeginPlay()
 
 
 	AMovementController* player = GetWorld()->SpawnActor<AMovementController>(PlayerBP, Lanes[1], FRotator::ZeroRotator);
+	AObstacleSpawner* Spawner = GetWorld()->SpawnActor<AObstacleSpawner>(ObstacleSpawner);
 
+	Spawner->Lanes = Lanes;
+	
 	player->Lanes = Lanes;
 	player->MoveToLane(0);
 }

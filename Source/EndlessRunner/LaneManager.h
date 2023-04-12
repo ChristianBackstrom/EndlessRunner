@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "MovementController.h"
+#include "Obstacle.h"
+#include "ObstacleSpawner.h"
 #include "GameFramework/Actor.h"
 #include "LaneManager.generated.h"
 
@@ -27,8 +29,11 @@ public:
 private:
 	UPROPERTY(EditAnywhere, meta = (MakeEditWidget = true))
 	TArray<FVector> Lanes;
-
+	
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AMovementController> PlayerBP;
-
+	
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AObstacleSpawner> ObstacleSpawner;
+	
 };

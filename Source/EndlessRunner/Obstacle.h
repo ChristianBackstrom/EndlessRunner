@@ -23,4 +23,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	float GameSpeed;
+
+private:
+	UPROPERTY(EditAnywhere)
+	UStaticMeshComponent* StaticMeshComponent;
+
+	float LifeTime = 10.f;
 };
