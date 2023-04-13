@@ -23,6 +23,8 @@ void AObstacleSpawner::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	Timer += DeltaTime;
+
+	GameSpeed += DeltaTime * DifficultyIncreaseRate;
 	
 	if (Timer >= Cooldown)
 	{

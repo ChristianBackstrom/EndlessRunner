@@ -34,6 +34,9 @@ private:
 	float Cooldown;
 
 	UPROPERTY(EditAnywhere)
+	float DifficultyIncreaseRate;
+	
+	UPROPERTY(EditAnywhere)
 	TArray<TSubclassOf<AObstacle>> ObstaclesToSpawn;
 
 	TArray<AObstacle*> SpawnedObstacles;
