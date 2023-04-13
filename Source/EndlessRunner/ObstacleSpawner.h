@@ -38,6 +38,4 @@ private:
 	
 	UPROPERTY(EditAnywhere)
 	TArray<TSubclassOf<AObstacle>> ObstaclesToSpawn;
-
-	TArray<AObstacle*> SpawnedObstacles;
 };

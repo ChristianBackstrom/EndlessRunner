@@ -39,8 +39,6 @@ void AObstacleSpawner::Tick(float DeltaTime)
 		AObstacle* Obstacle = GetWorld()->SpawnActor<AObstacle>(ObstaclesToSpawn[randomObstacle], Lanes[randomLane] + FVector(2000, 0,0), FRotator::ZeroRotator);
 
 		Obstacle->GameSpeed = GameSpeed;
-
-		SpawnedObstacles.Add(Obstacle);
 	}
 }
 
