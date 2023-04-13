@@ -15,6 +15,7 @@ AObstacleSpawner::AObstacleSpawner()
 void AObstacleSpawner::BeginPlay()
 {
 	Super::BeginPlay();
+	Cooldown = FMath::RandRange(.4f, 1.f);
 }
 
 // Called every frame
@@ -35,7 +36,7 @@ void AObstacleSpawner::Tick(float DeltaTime)
 
 		int randomLane = FMath::RandRange(0, Lanes.Num() - 1);
 
-		AObstacle* Obstacle = GetWorld()->SpawnActor<AObstacle>(ObstaclesToSpawn[randomObstacle], Lanes[randomLane] + FVector(1000, 0,0), FRotator::ZeroRotator);
+		AObstacle* Obstacle = GetWorld()->SpawnActor<AObstacle>(ObstaclesToSpawn[randomObstacle], Lanes[randomLane] + FVector(2000, 0,0), FRotator::ZeroRotator);
 
 		Obstacle->GameSpeed = GameSpeed;
 

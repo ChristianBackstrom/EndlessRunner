@@ -29,5 +29,6 @@ private:
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* StaticMeshComponent;
 
+	UPROPERTY(EditAnywhere)
 	float LifeTime = 10.f;
 };
