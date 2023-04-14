@@ -19,4 +19,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void PlayerHit();
+
+	float GameSpeed = 1;
 };

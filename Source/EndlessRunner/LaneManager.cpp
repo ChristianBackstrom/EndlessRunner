@@ -2,9 +2,6 @@
 
 
 #include "LaneManager.h"
-#include "MovementController.h"
-#include "ObstacleSpawner.h"
-#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ALaneManager::ALaneManager()
@@ -18,15 +15,6 @@ ALaneManager::ALaneManager()
 void ALaneManager::BeginPlay()
 {
 	Super::BeginPlay();
-
-
-	AMovementController* player = GetWorld()->SpawnActor<AMovementController>(PlayerBP, Lanes[1], FRotator::ZeroRotator);
-	AObstacleSpawner* Spawner = GetWorld()->SpawnActor<AObstacleSpawner>(ObstacleSpawner);
-
-	Spawner->Lanes = Lanes;
-	
-	player->Lanes = Lanes;
-	player->MoveToLane(0);
 }
 
 // Called every frame

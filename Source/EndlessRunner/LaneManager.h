@@ -3,9 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "MovementController.h"
-#include "Obstacle.h"
-#include "ObstacleSpawner.h"
 #include "GameFramework/Actor.h"
 #include "LaneManager.generated.h"
 
@@ -26,14 +23,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-private:
+public:
 	UPROPERTY(EditAnywhere, meta = (MakeEditWidget = true))
 	TArray<FVector> Lanes;
-	
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<AMovementController> PlayerBP;
-	
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<AObstacleSpawner> ObstacleSpawner;
 	
 };

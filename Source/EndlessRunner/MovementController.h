@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
 #include "InputMappingContext.h"
+#include "LaneManager.h"
 #include "MovementController.generated.h"
 
 UCLASS()
@@ -42,10 +43,12 @@ private:
 public:
 	void MoveToLane(int32 index);
 	
-	UPROPERTY(VisibleAnywhere)
 	TArray<FVector> Lanes;
 
 private:
 	int32 Currentlane;
+
+	UPROPERTY(EditInstanceOnly)
+	ALaneManager* LaneManager;
 
 };

@@ -3,7 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "LaneManager.h"
 #include "Obstacle.h"
+#include "GameManager.h"
 #include "GameFramework/Actor.h"
 #include "ObstacleSpawner.generated.h"
 
@@ -29,6 +31,11 @@ public:
 	TArray<FVector> Lanes;
 
 private:
+	UPROPERTY(EditInstanceOnly)
+	ALaneManager* LaneManager;
+
+	UGameManager* GameManager;
+	
 	float Timer;
 
 	float Cooldown;

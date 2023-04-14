@@ -17,8 +17,10 @@ AMovementController::AMovementController()
 void AMovementController::BeginPlay()
 {
 	Super::BeginPlay();
-
+	Lanes = LaneManager->Lanes;
+	
 	Currentlane = 0;
+	MoveToLane(Currentlane);
 }
 
 // Called every frame

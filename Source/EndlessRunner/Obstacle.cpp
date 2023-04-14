@@ -3,6 +3,7 @@
 
 #include "Obstacle.h"
 
+#include "ObstacleSpawner.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -20,6 +21,7 @@ void AObstacle::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GameManager = Cast<UGameManager>(UGameplayStatics::GetGameInstance(GetWorld()));
 }
 
 // Called every frame
@@ -27,6 +29,7 @@ void AObstacle::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	
 	LifeTime -= DeltaTime;
 
 	if (LifeTime <= 0)
@@ -34,6 +37,6 @@ void AObstacle::Tick(float DeltaTime)
 		Destroy();
 	}
 
-	AddActorLocalOffset(FVector::BackwardVector * GameSpeed * 5);
+	AddActorLocalOffset(FVector::BackwardVector * GameManager->GameSpeed * 5);
 }
 
