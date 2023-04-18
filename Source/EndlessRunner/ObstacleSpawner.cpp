@@ -2,7 +2,6 @@
 
 
 #include "ObstacleSpawner.h"
-
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -38,12 +37,21 @@ void AObstacleSpawner::Tick(float DeltaTime)
 	{
 		Timer = 0;
 		Cooldown = FMath::RandRange(.4f, 1.f);
-		
-		int randomObstacle = FMath::RandRange(0, ObstaclesToSpawn.Num() - 1);
+		int amount = FMath::RandRange(1, Lanes.Num() - 1);
+		int LastLane = -1;
 
-		int randomLane = FMath::RandRange(0, Lanes.Num() - 1);
+		for (int i = 0; i < amount; ++i)
+		{
+			int randomObstacle = FMath::RandRange(0, ObstaclesToSpawn.Num() - 1);
 
-		AObstacle* Obstacle = GetWorld()->SpawnActor<AObstacle>(ObstaclesToSpawn[randomObstacle], Lanes[randomLane] + FVector(2000, 0,0), FRotator::ZeroRotator);
+			int randomLane = FMath::RandRange(0, Lanes.Num() - 1);
+
+			if (randomLane != LastLane)
+			{
+				AObstacle* Obstacle = GetWorld()->SpawnActor<AObstacle>(ObstaclesToSpawn[randomObstacle], Lanes[randomLane] + FVector(2000, 0,0), FRotator::ZeroRotator);
+				LastLane = randomLane;
+			}
+		}
 	}
 }
 

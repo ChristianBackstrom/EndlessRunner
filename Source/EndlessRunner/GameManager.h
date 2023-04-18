@@ -20,5 +20,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void PlayerHit();
 
+	UPROPERTY(BlueprintReadOnly)
 	float GameSpeed = 1;
 };
