@@ -2,6 +2,7 @@
 
 
 #include "GameManager.h"
+#include "Kismet/GameplayStatics.h"
 
 void UGameManager::PlayerHit()
 {
@@ -9,8 +10,10 @@ void UGameManager::PlayerHit()
 
 	if (Lives <= 0)
 	{
-		if (GEngine)
-			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::White, TEXT("YOU LOST"));
+		UGameplayStatics::OpenLevel(GetWorld(), "MainMenu");
+		Lives = 0;
+		Score = 0;
+		GameSpeed = 1;
 	}
 }
 
