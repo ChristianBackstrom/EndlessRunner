@@ -17,6 +17,9 @@ class ENDLESSRUNNER_API UGameManager : public UGameInstance
 public:
 	UPROPERTY(BlueprintReadOnly)
 	int Lives = 3;
+	
+	UPROPERTY(BlueprintReadOnly)
+	float Score = 0;
 
 	UFUNCTION(BlueprintCallable)
 	void PlayerHit();
