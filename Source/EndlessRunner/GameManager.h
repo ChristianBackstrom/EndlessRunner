@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
+#include "Http.h"
+#include "Json.h"
 #include "GameManager.generated.h"
 
 /**
@@ -21,9 +23,24 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	float Score = 0;
 
-	UFUNCTION(BlueprintCallable)
-	void PlayerHit();
 
 	UPROPERTY(BlueprintReadOnly)
 	float GameSpeed = 1;
+
+public:
+	UFUNCTION(BlueprintCallable)
+	void PlayerHit();
+
+	UFUNCTION(BlueprintCallable)
+	void GetHighScore();
+	
+	UPROPERTY(BlueprintReadOnly)
+	TArray<int32> Scores;
+
+private:
+	
+	void OnGetResponseRecieved(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bConnectedSuccesfully);
+	void OnResponseRecieved(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bConnectedSuccesfully);
+
+
 };
