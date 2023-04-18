@@ -15,6 +15,7 @@ class ENDLESSRUNNER_API UGameManager : public UGameInstance
 	GENERATED_BODY()
 
 public:
+	UPROPERTY(BlueprintReadOnly)
 	int Lives = 3;
 
 	UFUNCTION(BlueprintCallable)
