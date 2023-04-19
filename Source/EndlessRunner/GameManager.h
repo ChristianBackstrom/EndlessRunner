@@ -32,15 +32,15 @@ public:
 	void PlayerHit();
 
 	UFUNCTION(BlueprintCallable)
-	void GetHighScore();
+	FString GetHighScore();
 	
-	UPROPERTY(BlueprintReadOnly)
-	TArray<int32> Scores;
+	// UPROPERTY(BlueprintReadOnly)
+	// TArray<int32> Scores;
 
 private:
 	
-	void OnGetResponseRecieved(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bConnectedSuccesfully);
-	void OnResponseRecieved(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bConnectedSuccesfully);
+	// void OnGetResponseRecieved(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bConnectedSuccesfully);
+	// void OnResponseRecieved(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bConnectedSuccesfully);
 
 
 };
