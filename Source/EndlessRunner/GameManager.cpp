@@ -28,7 +28,7 @@ void UGameManager::PlayerHit()
 		}
 		else
 		{
-			scoreString.Append("\n");
+			scoreString.Append(" ");
 			scoreString.Append(FString::FromInt(score));
 
 			FileHandler::WriteStringToFile("C:/Temp/HighScore.txt", scoreString, bOutSuccess, OutMessageInfo);
