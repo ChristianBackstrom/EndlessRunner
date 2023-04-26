@@ -6,6 +6,7 @@
 #include "LaneManager.h"
 #include "Obstacle.h"
 #include "GameManager.h"
+#include "MovementController.h"
 #include "GameFramework/Actor.h"
 #include "ObstacleSpawner.generated.h"
 
@@ -34,7 +35,12 @@ private:
 	UPROPERTY(EditInstanceOnly)
 	ALaneManager* LaneManager;
 
+	UPROPERTY(EditInstanceOnly)
+	TArray<AMovementController*> Players;
+
 	UGameManager* GameManager;
+	
+	TArray<AObstacle*> LastSpawned;
 	
 	float Timer;
 

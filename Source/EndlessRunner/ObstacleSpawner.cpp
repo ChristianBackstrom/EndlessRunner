@@ -42,6 +42,8 @@ void AObstacleSpawner::Tick(float DeltaTime)
 		int amount = FMath::RandRange(1, Lanes.Num() - 1);
 		int LastLane = -1;
 
+		TArray<AObstacle*> newObstacle;
+
 		for (int i = 0; i < amount; ++i)
 		{
 			int randomObstacle = FMath::RandRange(0, ObstaclesToSpawn.Num() - 1);
@@ -51,9 +53,18 @@ void AObstacleSpawner::Tick(float DeltaTime)
 			if (randomLane != LastLane)
 			{
 				AObstacle* Obstacle = GetWorld()->SpawnActor<AObstacle>(ObstaclesToSpawn[randomObstacle], Lanes[randomLane] + FVector(2000, 0,0), FRotator::ZeroRotator);
+				newObstacle.Add(Obstacle);
+				Obstacle->Players = Players;
 				LastLane = randomLane;
+
+				for (int j = 0; j < LastSpawned.Num(); ++j)
+				{
+					LastSpawned[j]->OnPassed.AddDynamic(Obstacle, &AObstacle::PreviousHasBeenPassed);
+				}
 			}
 		}
+
+		LastSpawned = newObstacle;
 	}
 }
 

@@ -28,7 +28,6 @@ void AObstacle::BeginPlay()
 void AObstacle::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 	
 	LifeTime -= DeltaTime;
 
@@ -37,6 +36,28 @@ void AObstacle::Tick(float DeltaTime)
 		Destroy();
 	}
 
+	for (int i = 0; i < Players.Num(); ++i)
+	{
+		if (this->GetActorLocation().X - Players[i]->GetActorLocation().X < 0)
+		{
+			if (!hasBeenPassed)
+			{
+				float randomNumber = FMath::RandRange(0.f, 1.f);
+
+				OnPassed.Broadcast(randomNumber < 0.2f);
+				hasBeenPassed = true;
+			}
+		}
+	}
+
 	AddActorLocalOffset(FVector::BackwardVector * GameManager->GameSpeed * 5);
 }
+
+void AObstacle::PreviousHasBeenPassed(bool IsDestroyed)
+{
+	if (IsDestroyed)
+		Destroy();
+}
+
+
 

@@ -4,8 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameManager.h"
+#include "MovementController.h"
 #include "GameFramework/Actor.h"
 #include "Obstacle.generated.h"
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPassed, bool, IsDestroyed);
 
 UCLASS()
 class ENDLESSRUNNER_API AObstacle : public AActor
@@ -24,8 +27,17 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-private:
+	UFUNCTION()
+	void PreviousHasBeenPassed(bool IsDestroyed);
 
+public:
+	TArray<AMovementController*> Players;
+
+	FOnPassed OnPassed;
+	
+private:
+	bool hasBeenPassed = false;
+	
 	UGameManager* GameManager;
 	
 	UPROPERTY(EditAnywhere)
