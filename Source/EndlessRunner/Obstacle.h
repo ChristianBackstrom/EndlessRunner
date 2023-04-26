@@ -14,8 +14,8 @@ UCLASS()
 class ENDLESSRUNNER_API AObstacle : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	AObstacle();
 
@@ -23,7 +23,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -34,12 +34,15 @@ public:
 	TArray<AMovementController*> Players;
 
 	FOnPassed OnPassed;
-	
+
 private:
+	UPROPERTY(EditAnywhere)
+	float HitDetectionRadius;
+
 	bool hasBeenPassed = false;
-	
+
 	UGameManager* GameManager;
-	
+
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* StaticMeshComponent;
 

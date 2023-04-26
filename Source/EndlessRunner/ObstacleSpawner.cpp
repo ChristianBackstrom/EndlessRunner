@@ -7,7 +7,7 @@
 // Sets default values
 AObstacleSpawner::AObstacleSpawner()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 }
 
@@ -34,7 +34,7 @@ void AObstacleSpawner::Tick(float DeltaTime)
 
 	GameManager->Score += DeltaTime * GameSpeed;
 	GameManager->GameSpeed = GameSpeed;
-	
+
 	if (Timer >= Cooldown)
 	{
 		Timer = 0;
@@ -50,21 +50,26 @@ void AObstacleSpawner::Tick(float DeltaTime)
 
 			int randomLane = FMath::RandRange(0, Lanes.Num() - 1);
 
-			if (randomLane != LastLane)
-			{
-				AObstacle* Obstacle = GetWorld()->SpawnActor<AObstacle>(ObstaclesToSpawn[randomObstacle], Lanes[randomLane] + FVector(2000, 0,0), FRotator::ZeroRotator);
-				newObstacle.Add(Obstacle);
-				Obstacle->Players = Players;
-				LastLane = randomLane;
 
-				for (int j = 0; j < LastSpawned.Num(); ++j)
-				{
-					LastSpawned[j]->OnPassed.AddDynamic(Obstacle, &AObstacle::PreviousHasBeenPassed);
-				}
+			while (randomLane == LastLane)
+			{
+				randomLane = FMath::RandRange(0, Lanes.Num() - 1);
+			}
+
+			FVector location = Lanes[randomLane] + FVector(2000, 0, 0);
+			AObstacle* Obstacle = GetWorld()->SpawnActor<AObstacle>(ObstaclesToSpawn[randomObstacle], location,
+			                                                        FRotator::ZeroRotator);
+
+			newObstacle.Add(Obstacle);
+			Obstacle->Players = Players;
+			LastLane = randomLane;
+
+			for (int j = 0; j < LastSpawned.Num(); ++j)
+			{
+				LastSpawned[j]->OnPassed.AddDynamic(Obstacle, &AObstacle::PreviousHasBeenPassed);
 			}
 		}
 
 		LastSpawned = newObstacle;
 	}
 }
-

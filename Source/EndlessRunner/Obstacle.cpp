@@ -9,7 +9,7 @@
 // Sets default values
 AObstacle::AObstacle()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>("StaticMesh");
@@ -28,7 +28,7 @@ void AObstacle::BeginPlay()
 void AObstacle::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
+
 	LifeTime -= DeltaTime;
 
 	if (LifeTime <= 0)
@@ -38,8 +38,16 @@ void AObstacle::Tick(float DeltaTime)
 
 	for (int i = 0; i < Players.Num(); ++i)
 	{
-		if (this->GetActorLocation().X - Players[i]->GetActorLocation().X < 0)
+		FVector relativeLocation = this->GetActorLocation() - Players[i]->GetActorLocation();
+
+		if (relativeLocation.X < 0)
 		{
+			if (relativeLocation.Size() < HitDetectionRadius)
+			{
+				GameManager->PlayerHit();
+				Destroy();
+			}
+
 			if (!hasBeenPassed)
 			{
 				float randomNumber = FMath::RandRange(0.f, 1.f);
@@ -56,8 +64,7 @@ void AObstacle::Tick(float DeltaTime)
 void AObstacle::PreviousHasBeenPassed(bool IsDestroyed)
 {
 	if (IsDestroyed)
+	{
 		Destroy();
+	}
 }
-
-
-
