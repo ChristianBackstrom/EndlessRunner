@@ -2,6 +2,8 @@
 
 #include "EndlessRunnerGameMode.h"
 #include "EndlessRunnerCharacter.h"
+#include "MovementController.h"
+#include "Kismet/GameplayStatics.h"
 #include "UObject/ConstructorHelpers.h"
 
 AEndlessRunnerGameMode::AEndlessRunnerGameMode()
@@ -11,5 +13,9 @@ AEndlessRunnerGameMode::AEndlessRunnerGameMode()
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
-	} 
+	}
 }
+
+
+
+

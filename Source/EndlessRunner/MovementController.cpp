@@ -3,8 +3,8 @@
 
 #include "MovementController.h"
 #include "EnhancedInputComponent.h"
-#include "EnhancedInput/Public/InputMappingContext.h"
 #include "EnhancedInput/Public/EnhancedInputSubsystems.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AMovementController::AMovementController()
@@ -17,8 +17,8 @@ AMovementController::AMovementController()
 void AMovementController::BeginPlay()
 {
 	Super::BeginPlay();
-	Lanes = LaneManager->Lanes;
 	
+	Lanes = LaneManager->Lanes;
 	Currentlane = 0;
 	MoveToLane(Currentlane);
 }
@@ -58,9 +58,10 @@ void AMovementController::Move(const FInputActionValue& Value)
 	MoveToLane(Currentlane);
 }
 
-void AMovementController::MoveToLane(int32 index)
+void AMovementController::MoveToLane(int32 Index)
 {
-	SetActorLocation(Lanes[index]);
+	Index = FMath::Clamp(Index, 0, Lanes.Num()-1);
+	SetActorLocation(Lanes[Index] + Offset);
 }
 
 

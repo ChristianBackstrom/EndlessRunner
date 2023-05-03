@@ -42,11 +42,14 @@ private:
 
 public:
 	void MoveToLane(int32 index);
-	
-	TArray<FVector> Lanes;
+
+	UPROPERTY(EditInstanceOnly)
+	FVector Offset;
 
 private:
 	int32 Currentlane;
+
+	TArray<FVector> Lanes;
 
 	UPROPERTY(EditInstanceOnly)
 	ALaneManager* LaneManager;

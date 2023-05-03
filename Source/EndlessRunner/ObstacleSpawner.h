@@ -36,7 +36,10 @@ private:
 	ALaneManager* LaneManager;
 
 	UPROPERTY(EditInstanceOnly)
-	TArray<AMovementController*> Players;
+	TArray<AActor*> Collision;
+
+	UPROPERTY(EditInstanceOnly)
+	AMovementController* Player;
 
 	UGameManager* GameManager;
 	

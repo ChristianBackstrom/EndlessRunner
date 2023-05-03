@@ -61,7 +61,8 @@ void AObstacleSpawner::Tick(float DeltaTime)
 			                                                        FRotator::ZeroRotator);
 
 			newObstacle.Add(Obstacle);
-			Obstacle->Players = Players;
+			Obstacle->Collision = Collision;
+			Obstacle->PlayerToBePassed = Cast<AActor>(Player);
 			LastLane = randomLane;
 
 			for (int j = 0; j < LastSpawned.Num(); ++j)

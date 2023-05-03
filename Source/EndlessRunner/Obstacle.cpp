@@ -36,25 +36,25 @@ void AObstacle::Tick(float DeltaTime)
 		Destroy();
 	}
 
-	for (int i = 0; i < Players.Num(); ++i)
+	for (int i = 0; i < Collision.Num(); ++i)
 	{
-		FVector relativeLocation = this->GetActorLocation() - Players[i]->GetActorLocation();
+		FVector relativeLocation = this->GetActorLocation() - Collision[i]->GetActorLocation();
 
-		if (relativeLocation.X < 0)
+		if (relativeLocation.Size() < HitDetectionRadius)
 		{
-			if (relativeLocation.Size() < HitDetectionRadius)
-			{
-				GameManager->PlayerHit();
-				Destroy();
-			}
+			GameManager->PlayerHit();
+			Destroy();
+		}
+	}
 
-			if (!hasBeenPassed)
-			{
-				float randomNumber = FMath::RandRange(0.f, 1.f);
+	if ((this->GetActorLocation() - PlayerToBePassed->GetActorLocation()).X <= 0)
+	{
+		if (!hasBeenPassed)
+		{
+			float randomNumber = FMath::RandRange(0.f, 1.f);
 
-				OnPassed.Broadcast(randomNumber < 0.2f);
-				hasBeenPassed = true;
-			}
+			OnPassed.Broadcast(randomNumber < 0.2f);
+			hasBeenPassed = true;
 		}
 	}
 

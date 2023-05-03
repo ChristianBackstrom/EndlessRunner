@@ -31,8 +31,10 @@ public:
 	void PreviousHasBeenPassed(bool IsDestroyed);
 
 public:
-	TArray<AMovementController*> Players;
+	TArray<AActor*> Collision;
 
+	AActor* PlayerToBePassed;
+	
 	FOnPassed OnPassed;
 
 private:
