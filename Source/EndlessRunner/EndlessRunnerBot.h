@@ -28,7 +28,9 @@ private:
 	FOnObstacleInFront OnObstacleInFront;
 
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0", ClampMax = "1", UIMin = "0", UIMax = "1"))
-	float ChanceToAvoid;
+	float BaseChanceToAvoid;
+
+	float  ChanceToAvoid;
 
 	UPROPERTY(EditAnywhere)
 	float AvoidanceDistance;

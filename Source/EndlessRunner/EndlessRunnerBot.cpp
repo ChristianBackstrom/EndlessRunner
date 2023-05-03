@@ -17,6 +17,7 @@ void AEndlessRunnerBot::BeginPlay()
 
 	Lanes = LaneManager->Lanes;
 	FreeLanes = Lanes;
+	ChanceToAvoid = BaseChanceToAvoid;
 
 	MoveToLane(0);
 	
@@ -40,12 +41,10 @@ void AEndlessRunnerBot::Tick(float DeltaTime)
 		
 		if (GetWorld()->LineTraceSingleByChannel(OutHit, Start, End, ECC_Visibility, CollisionParams))
 		{
-			DrawDebugLine(GetWorld(), Start, End, FColor::Red, false,.01f,0,1);
 			FreeLanes.Remove(Lanes[i]);
 		}
 		else
 		{
-			DrawDebugLine(GetWorld(), Start, End, FColor::Green, false,.01f,0,1);
 			FreeLanes.AddUnique(Lanes[i]);
 		}
 	}
@@ -74,6 +73,7 @@ void AEndlessRunnerBot::ObstacleInFront()
 
 	if (bShouldAvoid)
 	{
+		ChanceToAvoid -= BaseChanceToAvoid / 30;
 		int Index = FMath::RandRange(0, FreeLanes.Num() - 1);
 
 		for (int i = 0; i < Lanes.Num(); ++i)
@@ -86,7 +86,10 @@ void AEndlessRunnerBot::ObstacleInFront()
 		}
 		
 		MoveToLane(Index);
+		return;
 	}
+
+	ChanceToAvoid = BaseChanceToAvoid;
 }
 
 void AEndlessRunnerBot::MoveToLane(int32 Index)

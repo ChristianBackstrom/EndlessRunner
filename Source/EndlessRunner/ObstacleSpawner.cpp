@@ -38,7 +38,7 @@ void AObstacleSpawner::Tick(float DeltaTime)
 	if (Timer >= Cooldown)
 	{
 		Timer = 0;
-		Cooldown = FMath::RandRange(.4f, 1.f);
+		Cooldown = FMath::RandRange(.8f, 1.5f);
 		int amount = FMath::RandRange(1, Lanes.Num() - 1);
 		int LastLane = -1;
 
