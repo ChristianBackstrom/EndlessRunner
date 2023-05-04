@@ -73,7 +73,7 @@ void AEndlessRunnerBot::ObstacleInFront()
 
 	if (bShouldAvoid)
 	{
-		ChanceToAvoid -= BaseChanceToAvoid / 30;
+		ChanceToAvoid -= BaseChanceToAvoid / 100;
 		int Index = FMath::RandRange(0, FreeLanes.Num() - 1);
 
 		for (int i = 0; i < Lanes.Num(); ++i)
